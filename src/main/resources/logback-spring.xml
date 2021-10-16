@@ -18,23 +18,7 @@
 			<Pattern>[%d{yyyy-MM-dd | HH:mm:ss}] [%t] [%logger{2}#%L] [%p]: %m%n</Pattern>
 		</encoder>
 	</appender>
-	<logger name="org.hibernate" level="warn" additivity="false">
-		<appender-ref ref="FILE-ROLLING"/>
-		<appender-ref ref="STDOUT"/>
-	</logger>
-	<logger name="com.zaxxer.hikari.pool.PoolBase" level="DEBUG">
-		<appender-ref ref="FILE-ROLLING"/>
-		<appender-ref ref="STDOUT"/>
-	</logger>
-	<logger name="com.zaxxer.hikari.pool.HikariPool" level="DEBUG">
-		<appender-ref ref="FILE-ROLLING"/>
-		<appender-ref ref="STDOUT"/>
-	</logger>
-	<logger name="com.zaxxer.hikari.HikariDataSource" level="DEBUG">
-		<appender-ref ref="FILE-ROLLING"/>
-		<appender-ref ref="STDOUT"/>
-	</logger>
-	<logger name="com.coppel.ecommerce" level="debug" additivity="false">
+	<logger name="com.garcan" level="debug" additivity="false">
 		<appender-ref ref="FILE-ROLLING"/>
 		<appender-ref ref="STDOUT"/>
 	</logger>
