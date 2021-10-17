@@ -170,6 +170,16 @@ public class XmlManager {
   }
 
   /**
+   * Default XPathConstants.STRING
+   *
+   * @throws XPathExpressionException
+   */
+  public <T> T getXPathResultFromNode(final Node node, final String xpathExpression)
+      throws XPathExpressionException {
+    return getXPathResultFromNode(node, xpathExpression, XPathConstants.STRING);
+  }
+
+  /**
    * normalize default false
    *
    * @throws XPathExpressionException

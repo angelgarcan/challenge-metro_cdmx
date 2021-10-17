@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.garcan.subway.model.MetroMap;
+import com.garcan.subway.model.Route;
+import com.garcan.subway.service.ItineraryService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -13,6 +15,8 @@ public class MainController {
 
   @Autowired
   private MetroMap subwayMap;
+  @Autowired
+  private ItineraryService itineraryService;
 
   @GetMapping("/map/list")
   public MetroMap mapList() throws Exception {
@@ -27,8 +31,16 @@ public class MainController {
     throw new UnsupportedOperationException("Not implemented yet!!!");
   }
 
+  @GetMapping("/route/get")
+  public Route getRoute(@RequestParam final String start, @RequestParam final String end)
+      throws Exception {
+    log.debug("Getting route...");
+    Route route = this.itineraryService.getRoute(start, end);
+    return route;
+  }
+
   @GetMapping("/itinerary/get")
-  public String envioCorreo(@RequestParam final String start, @RequestParam final String end)
+  public String getItinerary(@RequestParam final String start, @RequestParam final String end)
       throws Exception {
     log.debug("Getting itinerary...");
     // TODO: Code here.

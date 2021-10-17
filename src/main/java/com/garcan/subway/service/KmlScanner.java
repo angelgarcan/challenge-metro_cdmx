@@ -21,17 +21,17 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Configuration
-public class KmlEscanner {
+public class KmlScanner {
 
   private static final String DEFAULT_KML = "Metro_CDMX.kml";
-  private static final double MAX_TOLERANCE = 0.001505756658423248;
+  private static final double MAX_TOLERANCE_DISTANCE = 0.001505756658423248;
   private final XmlManager xmlManager = new XmlManager();
 
   @Bean(name = "subwayMap")
   @Scope("singleton")
   public MetroMap parseKml() throws ServiceException {
     try {
-      log.debug("Reading KML file: " + new File(DEFAULT_KML).getAbsolutePath());
+      log.debug("Parsing KML file: " + new File(DEFAULT_KML).getAbsolutePath());
       this.xmlManager.loadXML(DEFAULT_KML, "UTF-8");
 
       final List<Station> stations = parseStations();
@@ -51,11 +51,11 @@ public class KmlEscanner {
 
     for (final Node lineNode : linesNodesList) {
       final String lineName =
-          this.xmlManager.getXPathResultFromNode(lineNode, "./name", XPathConstants.STRING);
+          this.xmlManager.getXPathResultFromNode(lineNode, "./name");
       final Line line = new Line(lineName);
 
-      final String allCoordString = this.xmlManager.getXPathResultFromNode(lineNode,
-          "./LineString/coordinates", XPathConstants.STRING);
+      final String allCoordString =
+          this.xmlManager.getXPathResultFromNode(lineNode, "./LineString/coordinates");
       final List<Point> lineCoordinates =
           Arrays.stream(allCoordString.trim().split(" +"))
               .map(String::trim)
@@ -67,7 +67,11 @@ public class KmlEscanner {
         if (station == null) {
           continue;
         }
-        station.setId(stationId);
+        if (station.getId() == null) {
+          station.setId(stationId);
+        } else {
+          station.setId(station.getId() + "," + stationId);
+        }
         line.getStations().add(station);
       }
       linesList.add(line);
@@ -76,7 +80,7 @@ public class KmlEscanner {
   }
 
   private Station look4Station(final List<Station> stations, final Point coordinates) {
-    return look4Station(stations, coordinates, MAX_TOLERANCE);
+    return look4Station(stations, coordinates, MAX_TOLERANCE_DISTANCE);
   }
 
   private Station look4Station(final List<Station> stations, final Point point,
@@ -107,13 +111,11 @@ public class KmlEscanner {
 
     for (final Node stationNode : stationsNodesList) {
       final String stationName =
-          this.xmlManager.getXPathResultFromNode(stationNode, "./name", XPathConstants.STRING);
+          this.xmlManager.getXPathResultFromNode(stationNode, "./name");
       final String stationDesc =
-          this.xmlManager.getXPathResultFromNode(stationNode, "./description",
-              XPathConstants.STRING);
+          this.xmlManager.getXPathResultFromNode(stationNode, "./description");
       final Point stationPoint =
-          splitPoint(this.xmlManager.getXPathResultFromNode(stationNode, "./Point/coordinates",
-              XPathConstants.STRING));
+          splitPoint(this.xmlManager.getXPathResultFromNode(stationNode, "./Point/coordinates"));
       stationsList.add(
           Station.builder()
               .name(stationName)

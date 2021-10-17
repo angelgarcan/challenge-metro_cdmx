@@ -10,8 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 @RestControllerAdvice
 public class ResponseEntityExceptionHandler {
 
-  @ExceptionHandler(BaseExceptionAbs.class)
-  public final ResponseEntity<Response> handleNotFoundException(final BaseExceptionAbs ex) {
+  @ExceptionHandler(Exception.class)
+  public final ResponseEntity<Response> handleNotFoundException(final Exception ex) {
     log.error("Exception:", ex);
     return new ResponseEntity<>(new Response(ex), HttpStatus.INTERNAL_SERVER_ERROR);
   }
@@ -31,7 +31,7 @@ public class ResponseEntityExceptionHandler {
     private String message;
     private String stack;
 
-    public Response(final BaseExceptionAbs cause) {
+    public Response(final Exception cause) {
       this.message = cause.getMessage();
       this.stack = cause.toString();
     }
