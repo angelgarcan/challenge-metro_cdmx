@@ -8,7 +8,7 @@
 - Compile the project with `mvn clean package` command.  
 - The JAR file was uploaded here [subway-graph-1.0.0.jar](https://drive.google.com/file/d/1G-nEPkjRkLZbB_-zb5sWPLSYDD7eLQGT/view?usp=sharing), so you could use it to run the application with the command:  
 ```
-java -jar _release/subway-graph-1.0.0.jar
+java -jar subway-graph-1.0.0.jar
 ```
 
 ### Solutions
