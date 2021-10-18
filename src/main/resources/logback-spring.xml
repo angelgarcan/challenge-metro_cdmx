@@ -2,12 +2,12 @@
 <configuration>
 	<property resource="application.properties"/>
 	<appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>./logs/cc.log</file>
+		<file>./logs/subway.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>[%d{yyyy-MM-dd | HH:mm:ss}] [%t] [%logger{2}#%L] [%p]: %m%n</Pattern>
 		</encoder>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>./logs/cc.log.%d.%i.gz</fileNamePattern>
+			<fileNamePattern>./logs/subway.log.%d.%i.gz</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<maxFileSize>10MB</maxFileSize>
 			</timeBasedFileNamingAndTriggeringPolicy>

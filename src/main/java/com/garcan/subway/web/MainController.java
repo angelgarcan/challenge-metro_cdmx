@@ -70,7 +70,7 @@ public class MainController {
       prettyItinerary.append("   ");
       prettyItinerary.append(segment.pretty());
     }
-    prettyItinerary.append("You will arrive to \"");
+    prettyItinerary.append("You have arrived to \"");
     prettyItinerary.append(end);
     prettyItinerary.append("\" !!!");
     return prettyItinerary.toString();

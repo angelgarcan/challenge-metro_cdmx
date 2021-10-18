@@ -17,7 +17,7 @@ public class Route {
     stringBuilder.append("\" go direction to \"");
     stringBuilder.append(this.direction);
     stringBuilder.append("\" for ");
-    stringBuilder.append(this.path.size());
+    stringBuilder.append(this.path.size() - 1);
     stringBuilder.append(" stations until \"");
     stringBuilder.append(this.path.get(this.path.size() - 1));
     stringBuilder.append("\" :: ");

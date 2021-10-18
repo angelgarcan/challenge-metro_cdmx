@@ -1,5 +1,7 @@
 package com.garcan.subway.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.jgrapht.GraphPath;
@@ -46,6 +48,7 @@ public class ItineraryService {
     if (idxA > idxB) {
       terminalStation = stations.get(0);
       subPath = stations.subList(idxB, idxA + 1);
+      Collections.reverse(subPath);
     } else {
       terminalStation = stations.get(stations.size() - 1);
       subPath = stations.subList(idxA, idxB + 1);
@@ -99,6 +102,7 @@ public class ItineraryService {
     final SingleSourcePaths<String, DefaultEdge> iPaths =
         new DijkstraShortestPath<>(this.metroGraph.getGraph()).getPaths(start);
     final GraphPath<String, DefaultEdge> routeGraph = iPaths.getPath(end);
-    return new Route(routeGraph.getVertexList(), null);
+    return new Route(routeGraph != null ? routeGraph.getVertexList() : new ArrayList<String>(),
+        null);
   }
 }
