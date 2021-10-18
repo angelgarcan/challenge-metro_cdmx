@@ -1,15 +1,19 @@
 package com.garcan.subway.web;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.garcan.subway.model.Itinerary;
 import com.garcan.subway.model.MetroMap;
 import com.garcan.subway.model.Route;
+import com.garcan.subway.service.GraphGenerator;
 import com.garcan.subway.service.ItineraryService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,6 +25,8 @@ public class MainController {
   private MetroMap metroMap;
   @Autowired
   private ItineraryService itineraryService;
+  @Autowired
+  private GraphGenerator graphGenerator;
 
   @GetMapping("/map/list")
   public MetroMap mapList() throws Exception {
@@ -35,11 +41,10 @@ public class MainController {
         .map(s -> s.getName() + " -> " + s.getId()).collect(Collectors.toList());
   }
 
-  @GetMapping("/map/print")
-  public String mapPrint() throws Exception {
+  @GetMapping(value = "/map/print", produces = MediaType.IMAGE_PNG_VALUE)
+  public @ResponseBody byte[] mapPrint() throws IOException {
     log.debug("Printing map...");
-    // TODO: Code here.
-    throw new UnsupportedOperationException("Not implemented yet!!!");
+    return this.graphGenerator.readGraphImage();
   }
 
   @GetMapping("/route/get")
