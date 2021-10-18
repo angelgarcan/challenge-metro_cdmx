@@ -104,7 +104,7 @@ java -jar _release/subway-graph-1.0.0.jar
     ]
 } 
 ```
-- **/itinerary/pretty**: [Tlaltenco-Norte 45](http://localhost:8080/subway/api/v1/itinerary/pretty?start=Tlaltenco&end=Norte%45)  
+- **/itinerary/pretty**: [Tlaltenco-Norte 45](http://localhost:8080/subway/api/v1/itinerary/pretty?start=Tlaltenco&end=Norte%2045)  
 ```
 Starting at "Tlaltenco" follow the next steps:
 From "Tlaltenco" go direction to "Mixcoac" for 10 stations until "Atlalilco" :: [Tlaltenco, Zapotitlán, Nopalera, Olivos, Tezonco, Periférico Oriente, Calle 11, Lomas Estrella, San Andrés Tomatlán, Culhuacán, Atlalilco]
