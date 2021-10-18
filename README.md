@@ -1,12 +1,12 @@
-# Subway Challenge
+# Mexico City Metro Challenge
 
 ### Notes
 Use [**/itinerary/pretty**](http://localhost:8080/subway/api/v1/itinerary/pretty?start=Iztapalapa&end=La%20Raza) for a human redeable visualization.  
 Also you could use the Postman Collection with all the following endpoints and their responses [subway.postman_collection.json](_release/subway.postman_collection.json)  
-Compile the application with `mvn clean package` command.  
+Compile the project with `mvn clean package` command.  
 The JAR file was also attached, so you could use it to run the application with the command:  
 ```
-java -jar subway-graph-1.0.0.jar
+java -jar _release/subway-graph-1.0.0.jar
 ```
 
 ### Docs
@@ -42,7 +42,7 @@ java -jar subway-graph-1.0.0.jar
     "direction": null
 } 
 ```
-- **/itinerary/get**: [La Paz-Mixcoac](http://localhost:8080/subway/api/v1/itinerary/get?start=La Paz&end=Mixcoac)  
+- **/itinerary/get**: [La Paz-Mixcoac](http://localhost:8080/subway/api/v1/itinerary/get?start=La%20Paz&end=Mixcoac)  
 ```
 {
     "segments": [
