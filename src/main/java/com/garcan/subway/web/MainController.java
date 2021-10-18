@@ -72,7 +72,8 @@ public class MainController {
     }
     prettyItinerary.append("You have arrived to \"");
     prettyItinerary.append(end);
-    prettyItinerary.append("\" !!!");
+    prettyItinerary.append("\" !!!<br><br>\n\n");
+    prettyItinerary.append(this.itineraryService.getDijkstraRoute(start, end).toString());
     return prettyItinerary.toString();
   }
 }

@@ -3,9 +3,11 @@ package com.garcan.subway.model;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
+@ToString
 public class Route {
   private List<String> path;
   private String direction;

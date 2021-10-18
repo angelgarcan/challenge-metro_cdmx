@@ -32,7 +32,7 @@ java -jar _release/subway-graph-1.0.0.jar
 - **API Docs**: [Swagger Documentation](http://localhost:8080/subway/api/v1/swagger-ui.html#/main-controller) 
 - **/map/list**: [JSON](_release/map_list.json)
 - **/map/index**: [JSON](_release/map_index.json)
-- **/route/get**: [El Rosario-Pantitlán](http://localhost:8080/subway/api/v1/route/get?start=El%20Rosario&end=Pantitlán)  
+- **/route/get**: [El Rosario-La Raza](http://localhost:8080/subway/api/v1/route/get?start=El%20Rosario&end=Pantitlán)  
 ```
 {
     "path": [
@@ -104,12 +104,15 @@ java -jar _release/subway-graph-1.0.0.jar
     ]
 } 
 ```
-- **/itinerary/pretty**: [Iztapalapa-La Raza](http://localhost:8080/subway/api/v1/itinerary/pretty?start=Iztapalapa&end=La%20Raza)  
+- **/itinerary/pretty**: [Tlaltenco-Norte 45](http://localhost:8080/subway/api/v1/itinerary/pretty?start=Tlaltenco&end=Norte%45)  
 ```
-Starting at "El Rosario" follow the next steps:
-From "El Rosario" go direction to "Martin Carrera" for 6 stations until "Instituto del Petróleo" :: [El Rosario, Tezozomoc, Azcapotzalco, Ferrería, Norte 45, Vallejo, Instituto del Petróleo]
-From "Instituto del Petróleo" go direction to "Pantitlán" for 2 stations until "La Raza" :: [Instituto del Petróleo, Autobuses del Norte, La Raza]
-You have arrived to "La Raza" !!!
+Starting at "Tlaltenco" follow the next steps:
+From "Tlaltenco" go direction to "Mixcoac" for 10 stations until "Atlalilco" :: [Tlaltenco, Zapotitlán, Nopalera, Olivos, Tezonco, Periférico Oriente, Calle 11, Lomas Estrella, San Andrés Tomatlán, Culhuacán, Atlalilco]
+From "Atlalilco" go direction to "Garibaldi" for 6 stations until "Santa Anita" :: [Atlalilco, Escuadrón 201, Aculco, Apatlaco, Iztacalco, Coyuya, Santa Anita]
+From "Santa Anita" go direction to "Martin Carrera" for 6 stations until "Consulado" :: [Santa Anita, Jamaica, Fray Servando, Candelaria, Morelos, Canal del Norte, Consulado]
+From "Consulado" go direction to "Politécnico" for 5 stations until "Instituto del Petróleo" :: [Consulado, Valle Gómez, Misterios, La Raza, Autobuses del Norte, Instituto del Petróleo]
+From "Instituto del Petróleo" go direction to "El Rosario" for 2 stations until "Norte 45" :: [Instituto del Petróleo, Vallejo, Norte 45]
+You have arrived to "Norte 45" !!!
 ```
 
 ### References

@@ -47,11 +47,11 @@ public class ItineraryService {
     List<Station> subPath;
     if (idxA > idxB) {
       terminalStation = stations.get(0);
-      subPath = stations.subList(idxB, idxA + 1);
+      subPath = new ArrayList<>(stations.subList(idxB, idxA + 1));
       Collections.reverse(subPath);
     } else {
       terminalStation = stations.get(stations.size() - 1);
-      subPath = stations.subList(idxA, idxB + 1);
+      subPath = new ArrayList<>(stations.subList(idxA, idxB + 1));
     }
 
     return new Route(

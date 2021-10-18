@@ -23,7 +23,7 @@ Para cada segmento debe indicar:
 
 Los transbordos deben indicar a qué línea se debe dirigir para el nuevo segmento.
 
-**SOLUCIÓN:** [**/itinerary/pretty**](http://localhost:8080/subway/api/v1/itinerary/pretty?start=Iztapalapa&end=La%20Raza)
+**SOLUCIÓN:** [**/itinerary/pretty**](http://localhost:8080/subway/api/v1/itinerary/pretty?start=Tlaltenco&end=Norte%2045) 
 
 ## Etapa 3
 
