@@ -20,15 +20,15 @@ import lombok.extern.slf4j.Slf4j;
 public class GraphGenerator {
 
   @Autowired
-  private MetroMap subwayMap;
+  private MetroMap metroMap;
 
-  @Bean(name = "subwayGraph")
+  @Bean(name = "metroGraph")
   @Scope("singleton")
   @PostConstruct
   public MetroGraph graph() {
-    log.debug("Generating graph...");
+    log.info("Generating graph...");
     final Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
-    final List<Line> lines = this.subwayMap.getLines();
+    final List<Line> lines = this.metroMap.getLines();
 
     for (final Line line : lines) {
       final List<Station> stations = line.getStations();

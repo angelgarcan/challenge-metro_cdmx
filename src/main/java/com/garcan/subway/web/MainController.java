@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.garcan.subway.model.Itinerary;
 import com.garcan.subway.model.MetroMap;
 import com.garcan.subway.model.Route;
 import com.garcan.subway.service.ItineraryService;
@@ -17,22 +18,20 @@ import lombok.extern.slf4j.Slf4j;
 public class MainController {
 
   @Autowired
-  private MetroMap subwayMap;
+  private MetroMap metroMap;
   @Autowired
   private ItineraryService itineraryService;
-
-
 
   @GetMapping("/map/list")
   public MetroMap mapList() throws Exception {
     log.debug("Listing map...");
-    return this.subwayMap;
+    return this.metroMap;
   }
 
   @GetMapping("/map/index")
   public List<String> mapIndex() throws Exception {
     log.debug("Listing stations index...");
-    return new ArrayList<>(this.subwayMap.getIndex().values()).stream()
+    return new ArrayList<>(this.metroMap.getIndex().values()).stream()
         .map(s -> s.getName() + " -> " + s.getId()).collect(Collectors.toList());
   }
 
@@ -47,15 +46,33 @@ public class MainController {
   public Route routeGet(@RequestParam final String start, @RequestParam final String end)
       throws Exception {
     log.debug("Getting route...");
-    final Route route = this.itineraryService.getRoute(start, end);
+    final Route route = this.itineraryService.getDijkstraRoute(start, end);
     return route;
   }
 
   @GetMapping("/itinerary/get")
-  public String itineraryGet(@RequestParam final String start, @RequestParam final String end)
+  public Itinerary itineraryGet(@RequestParam final String start, @RequestParam final String end)
       throws Exception {
     log.debug("Getting itinerary...");
-    // TODO: Code here.
-    return start + " -> " + end;
+    return this.itineraryService.generateItinerary(start, end);
+  }
+
+  @GetMapping("/itinerary/pretty")
+  public String itineraryPretty(@RequestParam final String start, @RequestParam final String end)
+      throws Exception {
+    log.debug("Printing pretty itinerary...");
+    final Itinerary itinerary = this.itineraryService.generateItinerary(start, end);
+    final StringBuilder prettyItinerary = new StringBuilder();
+    prettyItinerary.append("Starting at \"");
+    prettyItinerary.append(start);
+    prettyItinerary.append("\" follow the next steps:<br>\n");
+    for (final Route segment : itinerary.getSegments()) {
+      prettyItinerary.append("   ");
+      prettyItinerary.append(segment.pretty());
+    }
+    prettyItinerary.append("You will arrive to \"");
+    prettyItinerary.append(end);
+    prettyItinerary.append("\" !!!");
+    return prettyItinerary.toString();
   }
 }

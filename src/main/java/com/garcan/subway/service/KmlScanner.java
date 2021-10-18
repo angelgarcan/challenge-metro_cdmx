@@ -30,11 +30,11 @@ public class KmlScanner {
 
   private final XmlManager xmlManager = new XmlManager();
 
-  @Bean(name = "subwayMap")
+  @Bean(name = "metroMap")
   @Scope("singleton")
   public MetroMap parseKml() throws ServiceException {
     try {
-      log.debug("Parsing KML file: " + new File(DEFAULT_KML).getAbsolutePath());
+      log.info("Parsing KML file: " + new File(DEFAULT_KML).getAbsolutePath());
       this.xmlManager.loadXML(DEFAULT_KML, "UTF-8");
 
       final Map<String, Station> stationsIndex = parseStations();
@@ -65,16 +65,20 @@ public class KmlScanner {
               .map(this::splitPoint)
               .collect(Collectors.toList());
       for (int i = 0; i < lineCoordinates.size(); i++) {
-        final String stationId = line.getId() + "-" + (i + 1);
         final Station station = look4Station(stations, lineCoordinates.get(i));
         if (station == null) {
           continue;
         }
+
+        station.getBelongsLines().add(line.getName());
+
+        final String stationId = line.getId() + "-" + (i + 1);
         if (station.getId() == null) {
           station.setId(stationId);
         } else {
           station.setId(station.getId() + "," + stationId);
         }
+
         line.getStations().add(station);
       }
       linesList.add(line);
